@@ -1,0 +1,8 @@
+# Runtime dependencies only: everything ClipNest imports to run from source or
+# as a packaged build. Versions are pinned and must stay in step with the
+# verified release candidate.
+#
+#   python -m pip install -r requirements.txt
+#
+# Tests need requirements-dev.txt, packaging needs requirements-build.txt.
+PySide6==6.12.0

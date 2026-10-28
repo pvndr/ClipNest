@@ -1,0 +1,114 @@
+# ClipNest - files that must never enter the repository.
+#
+# Only source code, tests, maintained tools, documentation, configuration and
+# the two icon assets belong in Git. Everything below is generated, local,
+# personal or build output.
+
+# --- Virtual environments -------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# --- Python bytecode and tooling caches -----------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.hypothesis/
+.ipynb_checkpoints/
+
+# --- Packaging and build output ------------------------------------------
+# This also covers the local audit directories kept under build/
+# (build/closure-final, build/release-gate, build/ui-evidence) and the verified
+# release artifact in dist/. They stay on disk and out of the repository.
+# build_support/ (the Windows version resource) is source, not build output.
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+pip-wheel-metadata/
+MANIFEST
+
+# --- Clipboard data, databases and SQLite sidecars -----------------------
+# ClipNest writes these under %LOCALAPPDATA%\ClipNest or CLIPNEST_DATA_DIR, so
+# they should never appear here; ignored anyway so a stray copy cannot leak a
+# history into the repository.
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite
+*.sqlite3
+*-wal
+*-shm
+*-journal
+
+# --- Runtime logs, preference files and settings -------------------------
+*.log
+*.ini
+# pytest.ini is maintained project configuration, not runtime state.
+!pytest.ini
+
+# --- Environment files ---------------------------------------------------
+.env
+.env.*
+# Documented, non-secret template (create it only if a template is ever added).
+!.env.example
+
+# --- Credentials and private keys ---------------------------------------
+*.pem
+*.key
+*.pfx
+*.p12
+*.jks
+*.keystore
+id_rsa*
+id_ed25519*
+*.ppk
+
+# --- Coverage output ----------------------------------------------------
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+junit*.xml
+test-results/
+
+# --- Local screenshots and evidence -------------------------------------
+# Audit evidence lives under build/ (already ignored); these cover a stray
+# directory created elsewhere. Do not add *.png here: the icon assets are
+# tracked.
+screenshots/
+evidence/
+ui-evidence/
+closure-final/
+release-gate/
+*.bmp
+
+# --- Temporary and editor files ----------------------------------------
+.DS_Store
+._*
+.Spotlight-V100/
+.Trashes/
+Thumbs.db
+ehthumbs.db
+desktop.ini
+*.bak
+*.tmp
+*.temp
+*.orig
+*.rej
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.code-workspace

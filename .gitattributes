@@ -1,0 +1,36 @@
+# Line endings: the repository stores text with LF. A Windows working tree keeps
+# its native CRLF (core.eol defaults to native), so checking out here does not
+# rewrite existing files. Nothing in ClipNest depends on the choice.
+* text=auto
+
+# Source, tests, tools and documentation are text.
+*.py      text diff=python
+*.spec    text diff=python
+*.md      text
+*.txt     text
+*.ini     text
+*.cfg     text
+*.toml    text
+*.yml     text
+*.yaml    text
+*.json    text
+
+# Windows shell scripts are text too, but stay CRLF when checked out.
+*.ps1     text eol=crlf
+*.psm1    text eol=crlf
+*.bat     text eol=crlf
+*.cmd     text eol=crlf
+
+# Binary assets: never converted, never diffed as text.
+*.ico     binary
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.bmp     binary
+*.exe     binary
+*.dll     binary
+*.pyd     binary
+*.db      binary
+*.sqlite  binary
+*.sqlite3 binary

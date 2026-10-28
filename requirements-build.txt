@@ -1,0 +1,4 @@
+# Build-time only: everything needed to produce the Windows release candidate.
+# The application itself needs nothing from this file; requirements.txt stays
+# the complete runtime dependency list.
+pyinstaller==6.22.3

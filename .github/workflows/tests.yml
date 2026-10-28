@@ -1,0 +1,53 @@
+name: tests
+
+# Automated tests only. The PyInstaller release build is deliberately not run
+# here: it produces a large artifact that is verified by hand before a release.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    name: pytest (Windows x64)
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          # PySide6 6.12.0 declares Python 3.10-3.15 support. 3.12 is pinned
+          # here because it is a stable release with wheels for every pinned
+          # dependency; the developer's local interpreter is not assumed to be
+          # available (or supported) on the runner.
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Show interpreter and tool versions
+        run: |
+          python --version
+          python -m pytest --version
+
+      # The suite runs on Qt's offscreen platform plugin (set in
+      # tests/conftest.py), so no display is needed and neither the real
+      # clipboard, the registry nor the user's DPAPI keys are touched.
+      - name: Run the test suite
+        run: python -m pytest
+
+      - name: Compile check
+        run: python -m compileall -q clipnest main.py tools tests

@@ -1,0 +1,10 @@
+# Development and test dependencies: the runtime dependencies plus the test
+# runner. Nothing here is imported by the application, so a packaged build
+# never needs this file.
+#
+#   python -m pip install -r requirements-dev.txt
+#   python -m pytest
+#
+# pytest is pinned to the version the current test suite was verified with.
+-r requirements.txt
+pytest==8.4.2
